@@ -7,7 +7,7 @@ import (
 )
 
 func TestNextToken(t *testing.T) {
-	input := `=+-*/%(){},;`
+	input := `=+-*/%^(){}[],;`
 
 	tests := []struct {
 		expectedType    token.TokenType
@@ -19,10 +19,13 @@ func TestNextToken(t *testing.T) {
 		{token.MULTIPLIEDBY, "*"},
 		{token.DIVIDEDBY, "/"},
 		{token.MODULO, "%"},
+		{token.EXPONENT, "^"},
 		{token.LPAREN, "("},
 		{token.RPAREN, ")"},
 		{token.LBRACE, "{"},
 		{token.RBRACE, "}"},
+		{token.LBRACKET, "["},
+		{token.RBRACKET, "]"},
 		{token.COMMA, ","},
 		{token.SEMICOLON, ";"},
 	}

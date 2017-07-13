@@ -45,6 +45,8 @@ func (l *Lexer) NextToken() token.Token {
 		tok = newToken(token.DIVIDEDBY, l.ch)
 	case '%':
 		tok = newToken(token.MODULO, l.ch)
+	case '^':
+		tok = newToken(token.EXPONENT, l.ch)
 	case '(':
 		tok = newToken(token.LPAREN, l.ch)
 	case ')':
@@ -53,6 +55,10 @@ func (l *Lexer) NextToken() token.Token {
 		tok = newToken(token.LBRACE, l.ch)
 	case '}':
 		tok = newToken(token.RBRACE, l.ch)
+	case '[':
+		tok = newToken(token.LBRACKET, l.ch)
+	case ']':
+		tok = newToken(token.RBRACKET, l.ch)
 	case ',':
 		tok = newToken(token.COMMA, l.ch)
 	case ';':

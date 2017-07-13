@@ -43,6 +43,9 @@ const (
 	// MODULO is the modulo operator
 	MODULO = "%"
 
+	// DOTPRODUCT is a dot product operator
+	EXPONENT = "^"
+
 	// Delimiters
 
 	// COMMA separates input
@@ -51,17 +54,23 @@ const (
 	// SEMICOLON indicates the end of a line
 	SEMICOLON = ";"
 
-	// LPAREN indicates the opening of a function call
+	// LPAREN indicates the start of a function call
 	LPAREN = "("
 
-	// RPAREN indicates the closing of a function call
+	// RPAREN indicates the end of a function call
 	RPAREN = ")"
 
-	// LBRACE indicates the opening of a closure
+	// LBRACE indicates the start of a closure
 	LBRACE = "{"
 
-	// RBRACE indicates the closing of a closure
+	// RBRACE indicates the end of a closure
 	RBRACE = "}"
+
+	// LBRACKET indicates the start of a list
+	LBRACKET = "["
+
+	// RBRACKET indicates the end of a list
+	RBRACKET = "]"
 
 	// Keywords
 

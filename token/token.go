@@ -35,16 +35,25 @@ const (
 	MINUS = "-"
 
 	// MULTIPLIEDBY is the multiplication operator
-	MULTIPLIEDBY = "*"
+	ASTERISK = "*"
 
-	// DIVIDEDBY is the division operator
-	DIVIDEDBY = "/"
+	// SLASH is the division operator
+	SLASH = "/"
 
 	// MODULO is the modulo operator
 	MODULO = "%"
 
-	// DOTPRODUCT is a dot product operator
+	// EXPONENT is a dot product operator
 	EXPONENT = "^"
+
+	// BANG is the bang operator
+	BANG = "!"
+
+	// LT is the Less Than operator
+	LT = "<"
+
+	// GT is the Greater Than operator
+	GT = ">"
 
 	// Delimiters
 

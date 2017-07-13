@@ -42,13 +42,19 @@ func (l *Lexer) NextToken() token.Token {
 	case '-':
 		tok = newToken(token.MINUS, l.ch)
 	case '*':
-		tok = newToken(token.MULTIPLIEDBY, l.ch)
+		tok = newToken(token.ASTERISK, l.ch)
 	case '/':
-		tok = newToken(token.DIVIDEDBY, l.ch)
+		tok = newToken(token.SLASH, l.ch)
 	case '%':
 		tok = newToken(token.MODULO, l.ch)
 	case '^':
 		tok = newToken(token.EXPONENT, l.ch)
+	case '!':
+		tok = newToken(token.BANG, l.ch)
+	case '<':
+		tok = newToken(token.LT, l.ch)
+	case '>':
+		tok = newToken(token.GT, l.ch)
 	case '(':
 		tok = newToken(token.LPAREN, l.ch)
 	case ')':

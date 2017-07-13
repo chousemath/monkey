@@ -43,8 +43,10 @@ func TestNextToken(t *testing.T) {
 		}
 	}
 
-	input2 := `let five = 5;
+	input2 := `
+    let five = 5;
     let ten = 10;
+
     let add = fn(x, y) {
       x + y;
     };
@@ -91,6 +93,7 @@ func TestNextToken(t *testing.T) {
 		{token.IDENT, "ten"},
 		{token.RPAREN, ")"},
 		{token.SEMICOLON, ";"},
+		{token.EOF, ""},
 	}
 
 	l2 := New(input2)

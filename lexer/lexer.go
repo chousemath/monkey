@@ -17,7 +17,7 @@ func (l *Lexer) readChar() {
 	// check if at end of input
 	if l.readPosition >= len(l.input) {
 		// 0 is the ASCII code of NUL -> nothing read, or EOF
-		l.ch = 0
+		l.ch = '0'
 	} else {
 		l.ch = l.input[l.readPosition]
 	}
@@ -73,6 +73,10 @@ func (l *Lexer) NextToken() token.Token {
 			tok.Literal = l.readIdentifier()
 			tok.Type = token.LookupIdent(tok.Literal)
 			return tok
+		} else if isDigit(l.ch) {
+			tok.Type = token.INT
+			tok.Literal = l.readNumber()
+			return tok
 		} else {
 			tok = newToken(token.ILLEGAL, l.ch)
 		}
@@ -93,12 +97,23 @@ func (l *Lexer) readIdentifier() string {
 }
 
 func (l *Lexer) skipWhitespace() {
-	skipList := []byte{' ', '\t', '\n', '\r'}
-	for _, x := range skipList {
-		if l.ch == x {
-			l.readChar()
-		}
+	for l.ch == ' ' || l.ch == '\t' || l.ch == '\n' || l.ch == '\r' {
+		l.readChar()
 	}
+}
+
+func (l *Lexer) readNumber() string {
+	position := l.position
+
+	for isDigit(l.ch) {
+		l.readChar()
+	}
+
+	return l.input[position:l.position]
+}
+
+func isDigit(ch byte) bool {
+	return '0' <= ch && ch <= '9'
 }
 
 func isLetter(ch byte) bool {

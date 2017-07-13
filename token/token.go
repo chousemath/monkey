@@ -9,6 +9,7 @@ type Token struct {
 	Literal string
 }
 
+// a list of possible TokenTypes
 const (
 	// ILLEGAL represents a token/character we do not know about
 	ILLEGAL = "ILLEGAL"

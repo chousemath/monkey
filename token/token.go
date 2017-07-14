@@ -40,6 +40,9 @@ const (
 	// SLASH is the division operator
 	SLASH = "/"
 
+	// BAR is yet to be determined...
+	BAR = "|"
+
 	// MODULO is the modulo operator
 	MODULO = "%"
 
@@ -88,11 +91,31 @@ const (
 
 	// LET indicates variable assignment
 	LET = "LET"
+
+	// TRUE indicates a boolean true
+	TRUE = "TRUE"
+
+	// FALSE indicates a boolean false
+	FALSE = "FALSE"
+
+	// IF indicates a conditional if
+	IF = "IF"
+
+	// ELSE indicates a conditional else
+	ELSE = "ELSE"
+
+	// RETURN indicates a return statement
+	RETURN = "RETURN"
 )
 
 var keywords = map[string]TokenType{
-	"fn":  FUNCTION,
-	"let": LET,
+	"fn":     FUNCTION,
+	"let":    LET,
+	"true":   TRUE,
+	"false":  FALSE,
+	"if":     IF,
+	"else":   ELSE,
+	"return": RETURN,
 }
 
 // LookupIdent checks keyword hash map for keyword & returns TokenType or IDENT

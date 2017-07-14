@@ -62,6 +62,10 @@ func TestNextToken(t *testing.T) {
       x - y;
     };
     let result_two = subtract(three, two);
+
+    !-/*5|;
+
+    5 < 10 > 5;
   `
 
 	tests2 := []struct {
@@ -114,7 +118,6 @@ func TestNextToken(t *testing.T) {
 		{token.ASSIGN, "="},
 		{token.INT, "2"},
 		{token.SEMICOLON, ";"},
-
 		{token.LET, "let"},
 		{token.IDENT, "subtract"},
 		{token.ASSIGN, "="},
@@ -141,9 +144,23 @@ func TestNextToken(t *testing.T) {
 		{token.IDENT, "two"},
 		{token.RPAREN, ")"},
 		{token.SEMICOLON, ";"},
-
+		{token.BANG, "!"},
+		{token.MINUS, "-"},
+		{token.SLASH, "/"},
+		{token.ASTERISK, "*"},
+		{token.INT, "5"},
+		{token.BAR, "|"},
+		{token.SEMICOLON, ";"},
+		{token.INT, "5"},
+		{token.LT, "<"},
+		{token.INT, "10"},
+		{token.GT, ">"},
+		{token.INT, "5"},
+		{token.SEMICOLON, ";"},
 		{token.EOF, ""},
 	}
+
+	// !-/*5;
 
 	l2 := New(input2)
 

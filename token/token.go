@@ -64,6 +64,18 @@ const (
 	// NOTEQ is the inequality operator
 	NOTEQ = "!="
 
+	// PLUSEQ is the equivalent of += in C
+	PLUSEQ = "+="
+
+	// MINUSEQ is the equivalent of -= in C
+	MINUSEQ = "-="
+
+	// ASTERISKEQ is the equivalent of *= in C
+	ASTERISKEQ = "*="
+
+	// SLASHEQ is the equivalent of /= in C
+	SLASHEQ = "/="
+
 	// Delimiters
 
 	// COMMA separates input

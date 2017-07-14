@@ -42,13 +42,29 @@ func (l *Lexer) NextToken() token.Token {
 			tok = newToken(token.ASSIGN, l.ch)
 		}
 	case '+':
-		tok = newToken(token.PLUS, l.ch)
+		if l.peekChar() == '=' {
+			tok = token.Token{Type: token.PLUSEQ, Literal: l.concatChar()}
+		} else {
+			tok = newToken(token.PLUS, l.ch)
+		}
 	case '-':
-		tok = newToken(token.MINUS, l.ch)
+		if l.peekChar() == '=' {
+			tok = token.Token{Type: token.MINUSEQ, Literal: l.concatChar()}
+		} else {
+			tok = newToken(token.MINUS, l.ch)
+		}
 	case '*':
-		tok = newToken(token.ASTERISK, l.ch)
+		if l.peekChar() == '=' {
+			tok = token.Token{Type: token.ASTERISKEQ, Literal: l.concatChar()}
+		} else {
+			tok = newToken(token.ASTERISK, l.ch)
+		}
 	case '/':
-		tok = newToken(token.SLASH, l.ch)
+		if l.peekChar() == '=' {
+			tok = token.Token{Type: token.SLASHEQ, Literal: l.concatChar()}
+		} else {
+			tok = newToken(token.SLASH, l.ch)
+		}
 	case '|':
 		tok = newToken(token.BAR, l.ch)
 	case '%':

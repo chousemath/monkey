@@ -58,6 +58,12 @@ const (
 	// GT is the Greater Than operator
 	GT = ">"
 
+	// EQ is the equality operator
+	EQ = "=="
+
+	// NOTEQ is the inequality operator
+	NOTEQ = "!="
+
 	// Delimiters
 
 	// COMMA separates input

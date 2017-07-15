@@ -1,52 +1,23 @@
 package lexer
 
 import (
+	"fmt"
 	"testing"
 
 	"github.com/chousemath/monkey/token"
 )
 
+func typeError(i int, expected token.TokenType, actual token.TokenType) string {
+	return fmt.Sprintf("tests[%d], expected=%q, got=%q", i, expected, actual)
+}
+
+func literalError(i int, expected string, actual string) string {
+	return fmt.Sprintf("tests[%d], expected=%q, got=%q", i, expected, actual)
+}
+
 func TestNextToken(t *testing.T) {
-	input := `=+-*/%^(){}[],;!<>`
-	tests := []struct {
-		expectedType    token.TokenType
-		expectedLiteral string
-	}{
-		{token.ASSIGN, "="},
-		{token.PLUS, "+"},
-		{token.MINUS, "-"},
-		{token.ASTERISK, "*"},
-		{token.SLASH, "/"},
-		{token.MODULO, "%"},
-		{token.EXPONENT, "^"},
-		{token.LPAREN, "("},
-		{token.RPAREN, ")"},
-		{token.LBRACE, "{"},
-		{token.RBRACE, "}"},
-		{token.LBRACKET, "["},
-		{token.RBRACKET, "]"},
-		{token.COMMA, ","},
-		{token.SEMICOLON, ";"},
-		{token.BANG, "!"},
-		{token.LT, "<"},
-		{token.GT, ">"},
-	}
-
-	l := New(input)
-
-	for i, tt := range tests {
-		tok := l.NextToken()
-
-		if tok.Type != tt.expectedType {
-			t.Fatalf("tests[%d], expected=%q, got=%q", i, tt.expectedType, tok.Type)
-		}
-
-		if tok.Literal != tt.expectedLiteral {
-			t.Fatalf("tests[%d], expected=%q, got=%q", i, tt.expectedLiteral, tok.Literal)
-		}
-	}
-
-	input2 := `
+	input := `
+    =+-*/%^(){}[],;!<>
     let five = 5;
     let ten = 10;
 
@@ -79,10 +50,28 @@ func TestNextToken(t *testing.T) {
     += -= *= /= |=;
   `
 
-	tests2 := []struct {
+	tests := []struct {
 		expectedType    token.TokenType
 		expectedLiteral string
 	}{
+		{token.ASSIGN, "="},
+		{token.PLUS, "+"},
+		{token.MINUS, "-"},
+		{token.ASTERISK, "*"},
+		{token.SLASH, "/"},
+		{token.MODULO, "%"},
+		{token.EXPONENT, "^"},
+		{token.LPAREN, "("},
+		{token.RPAREN, ")"},
+		{token.LBRACE, "{"},
+		{token.RBRACE, "}"},
+		{token.LBRACKET, "["},
+		{token.RBRACKET, "]"},
+		{token.COMMA, ","},
+		{token.SEMICOLON, ";"},
+		{token.BANG, "!"},
+		{token.LT, "<"},
+		{token.GT, ">"},
 		{token.LET, "let"},
 		{token.IDENT, "five"},
 		{token.ASSIGN, "="},
@@ -202,17 +191,17 @@ func TestNextToken(t *testing.T) {
 		{token.EOF, ""},
 	}
 
-	l2 := New(input2)
+	l := New(input)
 
-	for i, tt := range tests2 {
-		tok := l2.NextToken()
+	for i, tt := range tests {
+		tok := l.NextToken()
 
 		if tok.Type != tt.expectedType {
-			t.Fatalf("tests2[%d], expected=%q, got=%q", i, tt.expectedType, tok.Type)
+			t.Fatalf(typeError(i, tt.expectedType, tok.Type))
 		}
 
 		if tok.Literal != tt.expectedLiteral {
-			t.Fatalf("tests[%d], expected=%q, got=%q", i, tt.expectedLiteral, tok.Literal)
+			t.Fatalf(literalError(i, tt.expectedLiteral, tok.Literal))
 		}
 	}
 }

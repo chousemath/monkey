@@ -36,51 +36,23 @@ func (l *Lexer) NextToken() token.Token {
 	// assign the appropriate token value
 	switch l.ch {
 	case '=':
-		if l.peekChar() == '=' {
-			tok = token.Token{Type: token.EQ, Literal: l.concatChar()}
-		} else {
-			tok = newToken(token.ASSIGN, l.ch)
-		}
+		tok = l.peekAndConcat(token.ASSIGN, token.EQ)
 	case '+':
-		if l.peekChar() == '=' {
-			tok = token.Token{Type: token.PLUSEQ, Literal: l.concatChar()}
-		} else {
-			tok = newToken(token.PLUS, l.ch)
-		}
+		tok = l.peekAndConcat(token.PLUS, token.PLUSEQ)
 	case '-':
-		if l.peekChar() == '=' {
-			tok = token.Token{Type: token.MINUSEQ, Literal: l.concatChar()}
-		} else {
-			tok = newToken(token.MINUS, l.ch)
-		}
+		tok = l.peekAndConcat(token.MINUS, token.MINUSEQ)
 	case '*':
-		if l.peekChar() == '=' {
-			tok = token.Token{Type: token.ASTERISKEQ, Literal: l.concatChar()}
-		} else {
-			tok = newToken(token.ASTERISK, l.ch)
-		}
+		tok = l.peekAndConcat(token.ASTERISK, token.ASTERISKEQ)
 	case '/':
-		if l.peekChar() == '=' {
-			tok = token.Token{Type: token.SLASHEQ, Literal: l.concatChar()}
-		} else {
-			tok = newToken(token.SLASH, l.ch)
-		}
+		tok = l.peekAndConcat(token.SLASH, token.SLASHEQ)
 	case '|':
-		if l.peekChar() == '=' {
-			tok = token.Token{Type: token.BAREQ, Literal: l.concatChar()}
-		} else {
-			tok = newToken(token.BAR, l.ch)
-		}
+		tok = l.peekAndConcat(token.BAR, token.BAREQ)
 	case '%':
 		tok = newToken(token.MODULO, l.ch)
 	case '^':
 		tok = newToken(token.EXPONENT, l.ch)
 	case '!':
-		if l.peekChar() == '=' {
-			tok = token.Token{Type: token.NOTEQ, Literal: l.concatChar()}
-		} else {
-			tok = newToken(token.BANG, l.ch)
-		}
+		tok = l.peekAndConcat(token.BANG, token.NOTEQ)
 	case '<':
 		tok = newToken(token.LT, l.ch)
 	case '>':
@@ -151,15 +123,21 @@ func (l *Lexer) readNumber() string {
 func (l *Lexer) peekChar() byte {
 	if l.readPosition >= len(l.input) {
 		return 0
-	} else {
-		return l.input[l.readPosition]
 	}
+	return l.input[l.readPosition]
 }
 
 func (l *Lexer) concatChar() string {
 	ch := l.ch
 	l.readChar()
 	return string(ch) + string(l.ch)
+}
+
+func (l *Lexer) peekAndConcat(defType token.TokenType, altType token.TokenType) token.Token {
+	if l.peekChar() == '=' {
+		return token.Token{Type: altType, Literal: l.concatChar()}
+	}
+	return newToken(defType, l.ch)
 }
 
 func isDigit(ch byte) bool {

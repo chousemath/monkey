@@ -76,7 +76,7 @@ func TestNextToken(t *testing.T) {
     10 == 10;
     10 != 9;
 
-    += -= *= /=;
+    += -= *= /= |=;
   `
 
 	tests2 := []struct {
@@ -197,11 +197,10 @@ func TestNextToken(t *testing.T) {
 		{token.MINUSEQ, "-="},
 		{token.ASTERISKEQ, "*="},
 		{token.SLASHEQ, "/="},
+		{token.BAREQ, "|="},
 		{token.SEMICOLON, ";"},
 		{token.EOF, ""},
 	}
-
-	// !-/*5;
 
 	l2 := New(input2)
 

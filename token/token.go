@@ -76,6 +76,9 @@ const (
 	// SLASHEQ is the equivalent of /= in C
 	SLASHEQ = "/="
 
+	// BAREQ is the equivalent of |= in Ruby
+	BAREQ = "|="
+
 	// Delimiters
 
 	// COMMA separates input

@@ -66,7 +66,11 @@ func (l *Lexer) NextToken() token.Token {
 			tok = newToken(token.SLASH, l.ch)
 		}
 	case '|':
-		tok = newToken(token.BAR, l.ch)
+		if l.peekChar() == '=' {
+			tok = token.Token{Type: token.BAREQ, Literal: l.concatChar()}
+		} else {
+			tok = newToken(token.BAR, l.ch)
+		}
 	case '%':
 		tok = newToken(token.MODULO, l.ch)
 	case '^':

@@ -1,5 +1,7 @@
 package ast
 
+import "github.com/chousemath/monkey/token"
+
 // an interface is defined behavior
 
 // Node represents a node on the AST tree
@@ -34,3 +36,28 @@ func (p *Program) TokenLiteral() string {
 	}
 	return ""
 }
+
+// LetStatement has 3 fields, name of var, expression of binding, node token
+type LetStatement struct {
+	Token token.Token
+	Name  *Identifier
+	Value Expression
+}
+
+// TokenLiteral satisfies the book-keeping requirements of the Node interface
+func (ls *LetStatement) TokenLiteral() string {
+	return ls.Token.Literal
+}
+func (ls *LetStatement) statementNode() {}
+
+// Identifier represents the identifier of variable binding
+type Identifier struct {
+	Token token.Token
+	Value string
+}
+
+// TokenLiteral satisfies the book-keeping requirements of the Node interface
+func (i *Identifier) TokenLiteral() string {
+	return i.Token.Literal
+}
+func (i *Identifier) expressionNode() {}
